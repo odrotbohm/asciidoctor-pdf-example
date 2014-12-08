@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.olivergierke.samples</groupId>
+	<artifactId>asciidoctor-pdf-sample</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctorj</artifactId>
+						<version>1.5.2</version>
+					</dependency>
+					<dependency>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctorj-pdf</artifactId>
+						<version>1.5.0-alpha.6</version>
+					</dependency>
+					<dependency>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctorj-epub3</artifactId>
+						<version>1.5.0-alpha.4</version>
+					</dependency>
+				</dependencies>
+				<executions>
+
+					<execution>
+						<id>html</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>html5</backend>
+							<sourceHighlighter>prettify</sourceHighlighter>
+							<attributes>
+								<linkcss>true</linkcss>
+								<numbered>true</numbered>
+								<icons>font</icons>
+								<sectanchors>true</sectanchors>
+								<toclevels>3</toclevels>
+							</attributes>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>docbook</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>docbook5</backend>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>epub</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>epub3</backend>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>pdf</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>pdf</backend>
+						</configuration>
+					</execution>
+
+				</executions>
+
+				<configuration>
+					<sourceDocumentName>index.adoc</sourceDocumentName>
+					<doctype>book</doctype>
+					<attributes>
+						<version>${project.version}</version>
+						<projectName>${project.name}</projectName>
+						<projectVersion>${project.version}</projectVersion>
+						<aspectjVersion>${aspectj}</aspectjVersion>
+						<querydslVersion>${querydsl}</querydslVersion>
+						<springVersion>${spring}</springVersion>
+						<allow-uri-read>true</allow-uri-read>
+						<sectids>false</sectids>
+					</attributes>
+				</configuration>
+
+			</plugin>
+		</plugins>
+	</build>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jcenter</id>
+			<url>https://dl.bintray.com/asciidoctor/maven</url>
+		</pluginRepository>
+	</pluginRepositories>
+</project>
